@@ -1,0 +1,43 @@
+# Results and logs of the training scripts and cluster jobs
+results/
+logs/
+*.out
+
+# Cluster launchers, but not the commands of the paper's runs
+*.sh
+!paper_configurations.sh
+
+# Notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Earlier versions of the code
+_old/
+
+# Data, arrays and model weights
+*.mat
+*.nwb
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.pkl
+*.pt
+*.pth
+# except the reference outputs of the tests
+!tests/golden_outputs.pt
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info
+dist/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+~$*
+
+# Credentials
+wandbkey

@@ -1,0 +1,4 @@
+# The control blocks build on sparks internals (see controls/__init__.py): keep sparks-ai to this version
+sparks-ai[allen,nlb]==0.3.*
+tqdm
+pytest
