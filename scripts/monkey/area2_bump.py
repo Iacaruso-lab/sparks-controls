@@ -10,7 +10,7 @@ utils.monkey.get_accuracy.
 
 Run from the repository root (see paper_configurations.sh for the runs of the paper), e.g.:
 
-    python -m scripts.monkey.area2_bump --home=/nemo/lab/iacarusof/home/shared/Nicolas --n_epochs=1000 \
+    python -m scripts.monkey.area2_bump --home=/path/to/data --n_epochs=1000 \
         --batch_size=64 --lr=0.01 --num_workers=4 --block_type=gru --seed=1
 
 Saves, under results/monkey/<block_type>/<mode>/ in the current directory, a
@@ -47,8 +47,6 @@ if __name__ == "__main__":
     parser.add_argument('--beta', type=float, default=0.0001, help='KLD regularisation')
     parser.add_argument('--batch_size', type=int, default=141, help='Batch size')
     parser.add_argument('--num_workers', type=int, default=0, help='For dataloading')
-    parser.add_argument('--online', action='store_true', default=False,
-                        help='Whether to use the online gradient descent algorithm (unused)')
     parser.add_argument('--patience', type=int, default=200, help='early stopping patience')
     parser.add_argument('--eps', type=float, default=0.001, help='early stopping tolerance')
 

@@ -7,7 +7,7 @@ the spikes themselves (unsupervised).
 
 Run from the repository root (see paper_configurations.sh for the runs of the paper), e.g.:
 
-    python -m scripts.allen_visual.train_allen_movies_pseudomouse --home=/nemo/lab/iacarusof/home/shared/Nicolas \
+    python -m scripts.allen_visual.train_allen_movies_pseudomouse --home=/path/to/data \
         --lr=0.01 --num_workers=4 --batch_size=5 --n_neurons=100 --block_type=gru --chunk_length=1000 \
         --mode=reconstruction --latent_dim=64
 

@@ -9,7 +9,7 @@ is scored on the whole recording. Scores are bits per spike (see mec.utils.bps_t
 
 Run from the repository root (see paper_configurations.sh for the runs of the paper), e.g.:
 
-    python -m scripts.mec.train_mec --home=/nemo/lab/iacarusof/home/shared/Nicolas --tau_p=1 --tau_f=1 \
+    python -m scripts.mec.train_mec --home=/path/to/data --tau_p=1 --tau_f=1 \
         --beta=0.0001 --lr=0.005 --mode=co-smoothing --n_epochs=5000 --block_type=gru --seed=1
 
 Saves, under results/mec/<mode>/<block_type>/tau_p/<tau_p>/tau_f/<tau_f>/ in the current directory, a
@@ -57,7 +57,6 @@ if __name__ == "__main__":
                         help='STDP decay, or several (space-separated) for one head each; set to 10 50 100 500 '
                              'in the co-smoothing mode')
     parser.add_argument('--cd_rate', type=float, default=0.4, help='Coordinated spike dropout rate for co-smoothing')
-    parser.add_argument('--config', type=str, default='light', choices=['light', 'full'])
     parser.add_argument('--last_stop', type=int, default=2600, help='Last stop time for training')
     parser.add_argument('--p_left_out', type=float, default=0.1,
                         help='Proportion of neurons to leave out for co-smoothing')

@@ -53,9 +53,7 @@ py() {
 # others. The models are trained on 600-2600 s of the session and tested on 2600-3600 s (--last_stop=2600).
 
 ## fig2_mec_controls: Hebbian attention replaced by other modules (2E, 2G, S2E-J)
-# 5 modules x 16 cells x 20 runs (seeds 1-20), plus seeds 21-30 in the best cell of each module, which S2H-J
-# average too (S2F has 20 runs per module). 2E and S2E show the symmetric rule's (1, 1) run with seed 5, 2G one run
-# per cell of the symmetric rule. In co-smoothing, the script sets tau_s = 10, 50, 100 and 500.
+# 5 modules x 16 cells x 20 runs (seeds 1-20)
 fig2_mec_controls() {
     local args=(--home="$DATA_HOME" --mode=co-smoothing --n_epochs=5000 --test_period=5 --lr=0.005 --beta=0.0001
                 --batch_size=1 --latent_dim=2 --bottleneck_dim=8 --embed_dim=32 --n_heads=1 --n_layers=0 --cd_rate=0.4
@@ -71,12 +69,6 @@ fig2_mec_controls() {
             done
         done
     done
-    for seed in $(seq 21 30); do
-        for block in mlp gru transformer correlation; do
-            py scripts.mec.train_mec "${args[@]}" --tau_p=1 --tau_f=1 --block_type=$block --seed=$seed
-        done
-        py scripts.mec.train_mec "${args[@]}" --tau_p=10 --tau_f=10 --block_type=symmetric --seed=$seed
-    done
 }
 
 
@@ -86,7 +78,7 @@ fig2_mec_controls() {
 # Spikes of 65 neurons of area 2, 1 ms bins, from 100 ms before to 500 ms after movement onset.
 
 ## fig3_area2_controls: Hebbian attention replaced by other modules (S3A-E, S3H, S3I)
-# Supervised (S3A-E, S3H): 10 runs per module (19 for correlation).
+# Supervised (S3A-E, S3H): 10 runs per module.
 # Co-smoothing (S3I): 10 runs per module; the script sets tau_s = 0.01, 0.05, 0.1 and 0.5 s in this mode.
 fig3_area2_controls() {
     local args=(--home="$DATA_HOME" --test_period=1 --batch_size=64 --beta=0.0001 --embed_dim=32
@@ -95,7 +87,7 @@ fig3_area2_controls() {
     for block in symmetric mlp gru transformer correlation; do
         for seed in $(seq 1 10); do
             py scripts.monkey.area2_bump "${args[@]}" --block_type=$block --mode=prediction --target_type=hand_pos \
-                --n_epochs=1000 --lr=0.01 --latent_dim=2 --bottleneck_dim=2 --n_layers=6 --tau_p=10 --tau_f=1 \
+                --n_epochs=1000 --lr=0.01 --latent_dim=2 --bottleneck_dim=2 --n_layers=2 --tau_p=10 --tau_f=1 \
                 --tau_s=0.5 --cd_rate=0 --seed=$seed
         done
         for seed in $(seq 1 10); do
@@ -114,8 +106,7 @@ fig3_area2_controls() {
 # by 2), 5 ms bins, 10 presentations per block.
 
 ## fig4_allen_controls: Hebbian attention replaced by other modules (S4A)
-# 5 modules x 10 runs, 100 neurons. S4A compares them with the 100-neuron runs of the fig4_allen_reconstruction
-# section of sparks-examples.
+# 5 modules x 10 runs, 100 neurons.
 fig4_allen_controls() {
     local block seed
     for block in symmetric correlation transformer mlp gru; do
