@@ -1,7 +1,7 @@
 # sparks-controls
 
 The control models of *A Biologically Inspired Attention Model for Neural Signal Analysis*
-(Skatchkovsky et al.): [SPARKS](https://github.com/FrancisCrickInstitute/SPARKS) with its Hebbian attention
+(Skatchkovsky et al.): [SPARKS](https://github.com/Iacaruso-lab/sparks) with its Hebbian attention
 block replaced by other modules, to test what the Hebbian attention contributes. Everything else in the model
 (the shared blocks, the latent space, the decoder, the training) is SPARKS' own.
 
